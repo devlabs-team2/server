@@ -1,4 +1,4 @@
 package com.dlteam2.server.User.Service;
 
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
 }
