@@ -1,5 +1,7 @@
 package com.dlteam2.server.User.Service;
 
+import com.dlteam2.server.Exception.ApiException;
+import com.dlteam2.server.Exception.ExceptionEnum;
 import com.dlteam2.server.User.Entity.LoginInfo;
 import com.dlteam2.server.User.Entity.LoginInfoId;
 import com.dlteam2.server.User.Entity.User;
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService{
         if (result.isPresent()){
             return result.get().getId();
         }else{
-            //에러 호출
+            throw new ApiException(ExceptionEnum.REQUEST_VALUE_INVALID);
         }
     }
 
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService{
         if (result.isPresent()){
             return result.get().getEmail();
         }else{
-            //에러 호출
+            throw new ApiException(ExceptionEnum.REQUEST_VALUE_INVALID);
         }
     }
 

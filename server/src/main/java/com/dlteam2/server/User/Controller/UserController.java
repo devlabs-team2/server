@@ -1,6 +1,8 @@
 package com.dlteam2.server.User.Controller;
 
 import com.dlteam2.server.Common.ResponseDTO;
+import com.dlteam2.server.Exception.ApiException;
+import com.dlteam2.server.Exception.ExceptionEnum;
 import com.dlteam2.server.User.Service.UserService;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.json.simple.JSONObject;
@@ -37,6 +39,7 @@ public class UserController {
 
         } catch(Exception e){
             //request 잘못 됐을 때 -> 에러 호출
+            throw new ApiException(ExceptionEnum.REQUEST_VALUE_INVALID);
         }
 
     }
