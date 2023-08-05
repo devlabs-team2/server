@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     @Autowired
@@ -26,8 +26,8 @@ public class UserController {
     public ResponseDTO.DataResponse searchEmail(@RequestBody JSONObject jsonObject){
         try {
             String mobile = jsonObject.get("mobile").toString();
-            String id = userService.findIdByMobile(jsonObject.get("mobile").toString());
-            String email = userService.findEmail(jsonObject.get("mobile").toString());
+            String id = userService.findIdByMobile(mobile);
+            String email = userService.findEmail(id);
 
             JSONObject result = new JSONObject();
             result.put("email", email);

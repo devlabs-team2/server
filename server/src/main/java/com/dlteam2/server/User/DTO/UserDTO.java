@@ -5,9 +5,6 @@ import com.dlteam2.server.User.Etc.Grade;
 import com.dlteam2.server.User.Etc.Role;
 import lombok.*;
 
-import javax.swing.colorchooser.AbstractColorChooserPanel;
-import java.util.UUID;
-
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserDTO {

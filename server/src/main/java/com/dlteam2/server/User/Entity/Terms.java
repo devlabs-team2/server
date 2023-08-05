@@ -8,17 +8,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.util.UUID;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Terms {
     @Id
-    private String id;
+    private UUID id; //회원 id
     private Boolean terms;
 
     @Builder
-    public Terms(String id, Boolean terms) {
+    public Terms(UUID id, Boolean terms) {
         this.id = id;
         this.terms = terms;
     }

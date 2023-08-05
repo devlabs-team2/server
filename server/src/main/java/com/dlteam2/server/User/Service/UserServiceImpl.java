@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService{
     public String findIdByMobile(String mobile) {
         Optional<User> result = userRepository.findByMobile(mobile);
         if (result.isPresent()){
-            return result.get().getId();
+            return result.get().getId().toString();
         }else{
             throw new ApiException(ExceptionEnum.REQUEST_VALUE_INVALID);
         }
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public String findEmail(String id){
         LoginInfoId loginInfoId = LoginInfoId.builder()
-                .id(id)
+                .id(UUID.fromString(id))
                 .loginType(LoginType.BASIC).build();
         Optional<LoginInfo> result = loginInfoRepository.findById(loginInfoId);
         if (result.isPresent()){

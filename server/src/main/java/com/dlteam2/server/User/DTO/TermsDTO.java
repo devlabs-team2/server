@@ -6,14 +6,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TermsDTO {
-    private String id;
+    private UUID id;
     private Boolean terms;
 
     @Builder
-    public TermsDTO(String id, Boolean terms) {
+    public TermsDTO(UUID id, Boolean terms) {
         this.id = id;
         this.terms = terms;
     }
