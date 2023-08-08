@@ -13,11 +13,12 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Table(name="Users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
     @Id
-    @GeneratedValue
-    private String id; //식별 id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id; //식별 id
     @Enumerated(value = EnumType.STRING)
     private Grade grade; //등급
     private String mobile; //전화번호
