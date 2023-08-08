@@ -1,5 +1,6 @@
 package com.dlteam2.server.User.Service;
 
+import com.dlteam2.server.Common.Constants;
 import com.dlteam2.server.Common.ServiceTest;
 import com.dlteam2.server.User.Entity.LoginInfo;
 import com.dlteam2.server.User.Entity.LoginInfoId;
@@ -36,8 +37,8 @@ class UserServiceImplTest extends ServiceTest {
     @Test
     void findIdByMobile() {
         User user = User.builder().build();
-        when(userRepository.findByMobile("01012345678")).thenReturn(Optional.of(user));
-        assertThat(userService.findIdByMobile("01012345678")).isEqualTo(user.getId());
+        when(userRepository.findByMobile(Constants.test_user_1_mobile)).thenReturn(Optional.of(user));
+        assertThat(userService.findIdByMobile(Constants.test_user_1_mobile)).isEqualTo(user.getId());
     }
 
     @DisplayName("id로 이메일을 조회한다")
@@ -45,6 +46,6 @@ class UserServiceImplTest extends ServiceTest {
     void findEmail() {
         LoginInfo loginInfo = LoginInfo.builder().build();
         when(loginInfoRepository.findById(any(LoginInfoId.class))).thenReturn(Optional.of(loginInfo));
-        assertThat(userService.findEmail("1")).isEqualTo(loginInfo.getEmail());
+        assertThat(userService.findEmail(Constants.test_user_1_id)).isEqualTo(loginInfo.getEmail());
     }
 }
