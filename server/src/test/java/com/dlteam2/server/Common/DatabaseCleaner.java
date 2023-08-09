@@ -19,9 +19,7 @@ public class DatabaseCleaner {
         this.tableNames = entityManager.getMetamodel()
                 .getEntities()
                 .stream()
-                .map(Type::getJavaType)
-                .map(javaType -> javaType.getAnnotation(Table.class))
-                .map(Table::name)
+                .map(entityType -> entityType.getName())
                 .collect(Collectors.toList());
     }
 

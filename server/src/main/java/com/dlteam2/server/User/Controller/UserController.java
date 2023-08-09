@@ -43,16 +43,16 @@ public class UserController {
     }
 
     @GetMapping ("/info")
-    public ResponseDTO.DataResponse userInfo(@RequestHeader("Authorization") String data){
+    public ResponseDTO.ObjectDataResponse userInfo(@RequestHeader("Authorization") String data){
         String id = userService.getUserId(data);
         UserInfoResponseDTO resultData = userService.getUserInfo(id);
 
         JSONObject result = new JSONObject();
         result.put("data", resultData);
 
-        return ResponseDTO.DataResponse.builder()
+        return ResponseDTO.ObjectDataResponse.builder()
                 .code(HttpStatus.OK.value())
                 .message(HttpStatus.OK.getReasonPhrase())
-                .data(result).build();
+                .data(resultData).build();
     }
 }

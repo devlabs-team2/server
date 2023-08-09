@@ -40,6 +40,21 @@ public class ResponseDTO {
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class ObjectDataResponse{
+        private int code;
+        private String message;
+        private Object data;
+
+        @Builder
+        public ObjectDataResponse(int code, String message, Object data) {
+            this.code = code;
+            this.message = message;
+            this.data = data;
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class ListResponse{
         private int code;
         private String message;

@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public String getUserId(String token) {
         try {
+            token = token.replaceFirst("Bearer ","");
             String id = JWT.decode(token)
                     .getClaim("id")
                     .asString();

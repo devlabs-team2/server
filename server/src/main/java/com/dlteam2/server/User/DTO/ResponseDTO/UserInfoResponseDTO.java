@@ -18,6 +18,7 @@ public class UserInfoResponseDTO {
     private List<LoginInfo> loginInfo;
     @Builder
     public static class LoginInfo{
+        @JsonProperty("email")
         private String email;
         @JsonProperty("login_type")
         private String loginType;
