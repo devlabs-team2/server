@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 public enum ExceptionEnum {
     ACCESS_DENIED_EXCEPTION(HttpStatus.UNAUTHORIZED, 403, "unauthorized"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "internal server error"),
-    REQUEST_VALUE_INVALID(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(), "입력값이 올바르지 않습니다"),
+    REQUEST_VALUE_INVALID(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(), "bad request"),
+    EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, 401, "expired token"),
+    INVALID_TOKEN(HttpStatus.UNAUTHORIZED, 401, "invalid token"),
     ;
 
 
