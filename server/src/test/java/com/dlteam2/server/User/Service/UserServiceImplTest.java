@@ -27,8 +27,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class UserServiceImplTest extends ServiceTest {
 
@@ -81,5 +82,16 @@ class UserServiceImplTest extends ServiceTest {
         when(userRepository.findById(UUID.fromString(Constants.test_user_1_id))).thenReturn(Optional.of(user));
         when(loginInfoRepository.findAllByIdId(UUID.fromString(Constants.test_user_1_id))).thenReturn(List.of(loginInfo));
         assertThat(userService.getUserInfo(Constants.test_user_1_id).getMobile()).isEqualTo(Constants.test_user_1_mobile);
+    }
+
+    @DisplayName("휴대폰 번호를 변경한다")
+    @Test
+    void updateMobile(){
+        User user = User.builder().grade(Grade.BASIC).mobile(Constants.test_user_1_mobile).role(Constants.test_user_1_role).build();
+        when(userRepository.findById(UUID.fromString(Constants.test_user_1_id))).thenReturn(Optional.of(user));
+        boolean result = userService.updateMobile(Constants.test_user_1_id, Constants.test_user_1_mobile);
+
+        assertTrue(result);
+        verify(userRepository, times(1)).save(any(User.class));
     }
 }
