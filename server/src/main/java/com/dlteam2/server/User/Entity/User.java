@@ -32,11 +32,11 @@ public class User {
         this.role = role;
     }
 
-    public void updateGrade(UserDTO userDTO){
-        this.grade = userDTO.getGrade();
+    public void updateGrade(Grade grade){
+        this.grade = grade;
     }
 
-    public void updateMobile(UserDTO userDTO){
-        this.mobile = userDTO.getMobile();
+    public void updateMobile(String mobile){
+        this.mobile = mobile;
     }
 }

@@ -17,6 +17,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -62,5 +63,25 @@ class UserControllerTest extends ControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.login_info[0].email").value(Constants.test_user_1_email));
+    }
+
+    @DisplayName("휴대폰 번호 변경 테스트")
+    @Test
+    @WithMockUser("user")
+    void updateMobile() throws Exception{
+        given(userService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
+        given(userService.updateMobile(Constants.test_user_1_id, Constants.test_user_1_mobile)).willReturn(true);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("mobile", Constants.test_user_1_mobile);
+
+        mockMvc.perform(patch("/users/info/update/mobile")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", Constants.test_user_1_token)
+                .content(objectMapper.writeValueAsString(jsonObject)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.result").value("SUCCESS"));
     }
 }

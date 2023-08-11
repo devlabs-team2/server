@@ -11,7 +11,6 @@ import com.dlteam2.server.User.Etc.LoginType;
 import com.dlteam2.server.User.Repository.LoginInfoRepository;
 import com.dlteam2.server.User.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -88,6 +87,17 @@ public class UserServiceImpl implements UserService{
             throw new ApiException(ExceptionEnum.REQUEST_VALUE_INVALID);
         }
 
+    }
+
+    @Override
+    public boolean updateMobile(String id, String mobile) {
+        Optional<User> user = userRepository.findById(UUID.fromString(id));
+        if(user.isPresent()){
+            user.get().updateMobile(mobile);
+            userRepository.save(user.get());
+            return true;
+        }
+        return false;
     }
 
 
