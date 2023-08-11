@@ -9,4 +9,6 @@ public interface UserService {
     String findEmail(String id);
     String getUserId(String token);
     UserInfoResponseDTO getUserInfo(String id);
+
+    boolean updateMobile(String id, String mobile);
 }
