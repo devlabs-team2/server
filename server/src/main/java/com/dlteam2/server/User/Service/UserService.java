@@ -11,4 +11,5 @@ public interface UserService {
     UserInfoResponseDTO getUserInfo(String id);
 
     boolean updateMobile(String id, String mobile);
+    boolean updateEmail(String id, String email);
 }
