@@ -104,4 +104,24 @@ class UserControllerTest extends ControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.result").value("SUCCESS"));
     }
+
+    @DisplayName("비밀번호 변경 테스트")
+    @Test
+    @WithMockUser("user")
+    void updatePassword() throws Exception{
+        given(userService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
+        given(userService.updatePassword(Constants.test_user_1_id, Constants.test_user_1_password)).willReturn(true);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("password", Constants.test_user_1_password);
+
+        mockMvc.perform(patch("/users/info/update/password")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", Constants.test_user_1_token)
+                        .content(objectMapper.writeValueAsString(jsonObject)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.result").value("SUCCESS"));
+    }
 }
