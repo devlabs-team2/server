@@ -29,7 +29,11 @@ public class LoginInfo {
         this.password = password;
     }
 
-    public void updatePassword(LoginInfoDTO loginInfoDTO){
-        this.password = loginInfoDTO.getPassword();
+    public void updatePassword(String password){
+        this.password = password;
+    }
+
+    public void updateEmail(String email){
+        this.email = email;
     }
 }

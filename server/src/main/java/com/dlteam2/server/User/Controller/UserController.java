@@ -71,4 +71,20 @@ public class UserController {
                 .message(HttpStatus.OK.getReasonPhrase())
                 .data(result).build();
     }
+
+    @PatchMapping("/info/update/email")
+    public ResponseDTO.DataResponse updateEmail(@RequestHeader("Authorization") String token, @RequestBody JSONObject data){
+        String id = userService.getUserId(token);
+        String email = data.get("email").toString();
+        JSONObject result = new JSONObject();
+        if(userService.updateEmail(id, email)){
+            result.put("result","SUCCESS");
+        }else{
+            result.put("result","FAIL");
+        }
+        return ResponseDTO.DataResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message(HttpStatus.OK.getReasonPhrase())
+                .data(result).build();
+    }
 }

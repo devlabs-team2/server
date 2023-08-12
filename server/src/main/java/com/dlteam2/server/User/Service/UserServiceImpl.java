@@ -100,5 +100,17 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
+    @Override
+    public boolean updateEmail(String id, String email) {
+        LoginInfoId loginInfoId = LoginInfoId.builder().id(UUID.fromString(id)).loginType(LoginType.BASIC).build();
+        Optional<LoginInfo> loginInfo = loginInfoRepository.findById(loginInfoId);
+        if(loginInfo.isPresent()){
+            loginInfo.get().updateEmail(email);
+            loginInfoRepository.save(loginInfo.get());
+            return true;
+        }
+        return false;
+    }
+
 
 }
