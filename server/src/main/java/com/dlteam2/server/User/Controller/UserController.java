@@ -87,4 +87,20 @@ public class UserController {
                 .message(HttpStatus.OK.getReasonPhrase())
                 .data(result).build();
     }
+
+    @PatchMapping("/info/update/password")
+    public ResponseDTO.DataResponse updatePassword(@RequestHeader("Authorization") String token, @RequestBody JSONObject data){
+        String id = userService.getUserId(token);
+        String password = data.get("password").toString();
+        JSONObject result = new JSONObject();
+        if(userService.updatePassword(id, password)){
+            result.put("result","SUCCESS");
+        }else{
+            result.put("result","FAIL");
+        }
+        return ResponseDTO.DataResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message(HttpStatus.OK.getReasonPhrase())
+                .data(result).build();
+    }
 }

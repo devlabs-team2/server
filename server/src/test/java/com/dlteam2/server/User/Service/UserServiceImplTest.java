@@ -111,4 +111,22 @@ class UserServiceImplTest extends ServiceTest {
         assertTrue(result);
         verify(loginInfoRepository, times(1)).save(any(LoginInfo.class));
     }
+
+    @DisplayName("비밀번호를 변경하다")
+    @Test
+    void updatePassword(){
+        LoginInfo loginInfo = LoginInfo.builder()
+                .id(LoginInfoId.builder()
+                        .id(UUID.fromString(Constants.test_user_1_id))
+                        .loginType(LoginType.BASIC)
+                        .build())
+                .email(Constants.test_user_1_email)
+                .password(Constants.test_user_1_password)
+                .build();
+        when(loginInfoRepository.findById(any(LoginInfoId.class))).thenReturn(Optional.of(loginInfo));
+        boolean result = userService.updatePassword(Constants.test_user_1_id, Constants.test_user_1_password);
+
+        assertTrue(result);
+        verify(loginInfoRepository, times(1)).save(any(LoginInfo.class));
+    }
 }
