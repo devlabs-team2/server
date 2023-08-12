@@ -94,4 +94,21 @@ class UserServiceImplTest extends ServiceTest {
         assertTrue(result);
         verify(userRepository, times(1)).save(any(User.class));
     }
+
+    @DisplayName("이메일을 변경한다")
+    @Test
+    void updateEmail(){
+        LoginInfo loginInfo = LoginInfo.builder()
+                .id(LoginInfoId.builder()
+                        .id(UUID.fromString(Constants.test_user_1_id))
+                        .loginType(LoginType.BASIC)
+                        .build())
+                .email(Constants.test_user_1_email)
+                .build();
+        when(loginInfoRepository.findById(any(LoginInfoId.class))).thenReturn(Optional.of(loginInfo));
+        boolean result = userService.updateEmail(Constants.test_user_1_id, Constants.test_user_1_email);
+
+        assertTrue(result);
+        verify(loginInfoRepository, times(1)).save(any(LoginInfo.class));
+    }
 }
