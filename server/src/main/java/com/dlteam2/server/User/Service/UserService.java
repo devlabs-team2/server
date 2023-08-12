@@ -12,4 +12,6 @@ public interface UserService {
 
     boolean updateMobile(String id, String mobile);
     boolean updateEmail(String id, String email);
+    boolean updatePassword(String id, String password);
+
 }

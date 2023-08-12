@@ -112,5 +112,23 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
+    @Override
+    public boolean updatePassword(String id, String password) {
+        LoginInfoId loginInfoId = LoginInfoId.builder().id(UUID.fromString(id)).loginType(LoginType.BASIC).build();
+        Optional<LoginInfo> loginInfo = loginInfoRepository.findById(loginInfoId);
+        if(loginInfo.isPresent()){
+            password = EncryptPassword(password); //비밀번호 암호화
+            loginInfo.get().updatePassword(password);
+            loginInfoRepository.save(loginInfo.get());
+            return true;
+        }
+        return false;
+    }
+
+    private String EncryptPassword(String password) {
+        //<---패스워드 암호화 로직 구현하기--->
+        return password;
+    }
+
 
 }
