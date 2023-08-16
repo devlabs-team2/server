@@ -15,12 +15,15 @@ import java.util.Date;
 public class RefreshToken {
     @EmbeddedId
     private RefreshTokenId id;
+    private String token;
     private Date iat; //발행일
     private boolean exp;
 
+
     @Builder
-    public RefreshToken(RefreshTokenId id, Date iat, boolean exp) {
+    public RefreshToken(RefreshTokenId id, String token, Date iat, boolean exp) {
         this.id = id;
+        this.token = token;
         this.iat = iat;
         this.exp = exp;
     }

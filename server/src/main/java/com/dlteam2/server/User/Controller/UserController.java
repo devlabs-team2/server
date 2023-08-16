@@ -4,6 +4,7 @@ import com.dlteam2.server.Common.ResponseDTO;
 import com.dlteam2.server.Exception.ApiException;
 import com.dlteam2.server.Exception.ExceptionEnum;
 import com.dlteam2.server.User.DTO.ResponseDTO.UserInfoResponseDTO;
+import com.dlteam2.server.User.Service.TokenService;
 import com.dlteam2.server.User.Service.UserService;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.json.simple.JSONObject;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final TokenService tokenService;
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, TokenService tokenService){
         this.userService = userService;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("/search/email")
@@ -44,7 +47,7 @@ public class UserController {
 
     @GetMapping ("/info")
     public ResponseDTO.ObjectDataResponse userInfo(@RequestHeader("Authorization") String token){
-        String id = userService.getUserId(token);
+        String id = tokenService.getUserId(token);
         UserInfoResponseDTO resultData = userService.getUserInfo(id);
 
         JSONObject result = new JSONObject();
@@ -58,7 +61,7 @@ public class UserController {
 
     @PatchMapping("/info/update/mobile")
     public ResponseDTO.DataResponse updateMobile(@RequestHeader("Authorization") String token, @RequestBody JSONObject data){
-        String id = userService.getUserId(token);
+        String id = tokenService.getUserId(token);
         String mobile = data.get("mobile").toString();
         JSONObject result = new JSONObject();
         if(userService.updateMobile(id, mobile)){
@@ -74,7 +77,7 @@ public class UserController {
 
     @PatchMapping("/info/update/email")
     public ResponseDTO.DataResponse updateEmail(@RequestHeader("Authorization") String token, @RequestBody JSONObject data){
-        String id = userService.getUserId(token);
+        String id = tokenService.getUserId(token);
         String email = data.get("email").toString();
         JSONObject result = new JSONObject();
         if(userService.updateEmail(id, email)){
@@ -90,7 +93,7 @@ public class UserController {
 
     @PatchMapping("/info/update/password")
     public ResponseDTO.DataResponse updatePassword(@RequestHeader("Authorization") String token, @RequestBody JSONObject data){
-        String id = userService.getUserId(token);
+        String id = tokenService.getUserId(token);
         String password = data.get("password").toString();
         JSONObject result = new JSONObject();
         if(userService.updatePassword(id, password)){

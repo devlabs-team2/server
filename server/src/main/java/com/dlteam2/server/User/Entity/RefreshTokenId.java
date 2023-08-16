@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Embeddable
 @Getter
@@ -17,11 +16,11 @@ public class RefreshTokenId implements Serializable {
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
-    private String id;
+    private UUID id;
 
     @Builder
-    public RefreshTokenId(User user, String id) {
-        this.user = user;
+    public RefreshTokenId(User user, UUID id) {
         this.id = id;
+        this.user = user;
     }
 }
