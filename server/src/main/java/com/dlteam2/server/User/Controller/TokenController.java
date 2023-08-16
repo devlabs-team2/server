@@ -25,7 +25,7 @@ public class TokenController {
         this.userService = userService;
     }
 
-    @PostMapping("refresh")
+    @PostMapping("/refresh")
     public ResponseDTO.DataResponse accessTokenRefresh(@RequestBody JSONObject data){
         try{
             String refreshToken = data.get("refresh_token").toString();

@@ -42,7 +42,7 @@ public class TokenServiceImpl implements TokenService{
     @Override
     public String refreshAccessToken(String token) {
         String userId = getUserId(token);
-        Optional<RefreshToken> latestRefreshToken = refreshTokenRepository.findTopByTokenOrderByIatDesc(token);
+        Optional<RefreshToken> latestRefreshToken = refreshTokenRepository.findTopByIdUserIdOrderByIatDesc(UUID.fromString(userId));
         if(latestRefreshToken.isPresent() && latestRefreshToken.get().getId().getUser().getId().equals(UUID.fromString(userId))){
             if(!latestRefreshToken.get().isExp()){
                 String refreshAccessToken = generateAccessToken(userId);
