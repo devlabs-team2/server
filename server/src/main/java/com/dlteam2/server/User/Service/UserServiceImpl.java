@@ -51,18 +51,6 @@ public class UserServiceImpl implements UserService{
         }
     }
 
-    @Override
-    public String getUserId(String token) {
-        try {
-            token = token.replaceFirst("Bearer ","");
-            String id = JWT.decode(token)
-                    .getClaim("id")
-                    .asString();
-            return id;
-        } catch(Exception e){
-            throw new ApiException(ExceptionEnum.INVALID_TOKEN);
-        }
-    }
 
     @Override
     public UserInfoResponseDTO getUserInfo(String id) {
@@ -125,6 +113,7 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
+    //TODO - 비밀번호 암호화
     private String EncryptPassword(String password) {
         //<---패스워드 암호화 로직 구현하기--->
         return password;

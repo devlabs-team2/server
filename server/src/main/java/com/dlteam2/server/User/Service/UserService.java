@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     String findIdByMobile(String mobile);
     String findEmail(String id);
-    String getUserId(String token);
     UserInfoResponseDTO getUserInfo(String id);
 
     boolean updateMobile(String id, String mobile);

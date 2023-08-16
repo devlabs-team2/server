@@ -40,6 +40,8 @@ class UserServiceImplTest extends ServiceTest {
 
     @InjectMocks
     private UserServiceImpl userService;
+    @InjectMocks
+    private TokenServiceImpl tokenService;
 
     @DisplayName("전화번호로 id를 조회한다")
     @Test
@@ -65,7 +67,7 @@ class UserServiceImplTest extends ServiceTest {
                 .withExpiresAt(new Date(System.currentTimeMillis()))
                 .withClaim("id", Constants.test_user_1_id)
                 .sign(Algorithm.HMAC512("secret"));
-        assertThat(userService.getUserId("Bearer " + jwt)).isEqualTo(Constants.test_user_1_id);
+        assertThat(tokenService.getUserId("Bearer " + jwt)).isEqualTo(Constants.test_user_1_id);
     }
 
     @DisplayName("id로 회원 정보를 반환한다")

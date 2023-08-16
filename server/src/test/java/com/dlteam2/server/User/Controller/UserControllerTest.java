@@ -47,7 +47,7 @@ class UserControllerTest extends ControllerTest {
     @Test
     @WithMockUser("user")
     void getUserInfo() throws Exception{
-        given(userService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
+        given(tokenService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
         given(userService.getUserInfo(Constants.test_user_1_id)).willReturn(UserInfoResponseDTO.builder()
                 .loginInfo(List.of(UserInfoResponseDTO.LoginInfo.builder()
                         .loginType(LoginType.BASIC.name())
@@ -69,7 +69,7 @@ class UserControllerTest extends ControllerTest {
     @Test
     @WithMockUser("user")
     void updateMobile() throws Exception{
-        given(userService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
+        given(tokenService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
         given(userService.updateMobile(Constants.test_user_1_id, Constants.test_user_1_mobile)).willReturn(true);
 
         JSONObject jsonObject = new JSONObject();
@@ -89,7 +89,7 @@ class UserControllerTest extends ControllerTest {
     @Test
     @WithMockUser("user")
     void updateEmail() throws Exception{
-        given(userService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
+        given(tokenService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
         given(userService.updateEmail(Constants.test_user_1_id, Constants.test_user_1_email)).willReturn(true);
 
         JSONObject jsonObject = new JSONObject();
@@ -109,7 +109,7 @@ class UserControllerTest extends ControllerTest {
     @Test
     @WithMockUser("user")
     void updatePassword() throws Exception{
-        given(userService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
+        given(tokenService.getUserId(Constants.test_user_1_token)).willReturn(Constants.test_user_1_id);
         given(userService.updatePassword(Constants.test_user_1_id, Constants.test_user_1_password)).willReturn(true);
 
         JSONObject jsonObject = new JSONObject();
